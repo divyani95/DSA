@@ -1,0 +1,55 @@
+#include <SDL2/SDL.h>
+
+int main() {
+    SDL_Init(SDL_INIT_VIDEO);
+
+    SDL_Window* window = SDL_CreateWindow("Bouncing Ball Animation",
+                                          SDL_WINDOWPOS_UNDEFINED,
+                                          SDL_WINDOWPOS_UNDEFINED,
+                                          640, 480,
+                                          SDL_WINDOW_SHOWN);
+
+    SDL_Renderer* renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
+
+    SDL_Event e;
+    int quit = 0;
+
+    int x = 50, y = 50;
+    int x_speed = 5, y_speed = 5;
+
+    while (!quit) {
+        while (SDL_PollEvent(&e) != 0) {
+            if (e.type == SDL_QUIT) {
+                quit = 1;
+            }
+        }
+
+        x += x_speed;
+        y += y_speed;
+
+        if (x > 640 - 20 || x < 0) {
+            x_speed = -x_speed;
+        }
+
+        if (y > 480 - 20 || y < 0) {
+            y_speed = -y_speed;
+        }
+
+        SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+        SDL_RenderClear(renderer);
+
+        SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
+        SDL_Rect ballRect = { x, y, 20, 20 };
+        SDL_RenderFillRect(renderer, &ballRect);
+
+        SDL_RenderPresent(renderer);
+
+        SDL_Delay(16); // Adjust the delay for smoother animation
+    }
+
+    SDL_DestroyRenderer(renderer);
+    SDL_DestroyWindow(window);
+    SDL_Quit();
+
+    return 0;
+}
