@@ -1,6 +1,4 @@
-//10. Greedy Approach
-
- //1. WAP to implement Activity Selection Problem.
+//
 
 import java.util.*;
 
@@ -66,16 +64,6 @@ public class ActivitySelection {
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
 
 
 
