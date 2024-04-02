@@ -4,7 +4,6 @@ class Qu
 {
 int front,rear,n;
 int q[];
-
 Qu(int size)
 {
 front = -1;
